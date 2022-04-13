@@ -5,7 +5,7 @@ param storageName string
 param storageID string
 param appInsights object
 param hostingPlan string
-var functionAppName = appName
+var functionAppName = 'clapptest0001'
 resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
   name: functionAppName
   location: location
