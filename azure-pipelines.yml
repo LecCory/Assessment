@@ -42,6 +42,7 @@ stages:
       displayName: 'Build extensions'
 
     - script: |
+        npm install typescript -g
         npm install $(Build.SourcesDirectory)/api
         (cd $(Build.SourcesDirectory)/api && npm run build --if-present)    
         (cd $(Build.SourcesDirectory)/api && npm run test --if-present)  
