@@ -43,8 +43,8 @@ stages:
 
     - script: |
         npm install $(Build.SourcesDirectory)/api
-        npm run $(Build.SourcesDirectory)/api build   --if-present 
-        npm run $(Build.SourcesDirectory)/api test --if-present
+        npm --if-present $(Build.SourcesDirectory)/api run build    
+        npm --if-present $(Build.SourcesDirectory)/api run test
       displayName: 'Prepare binaries'
 
     - task: ArchiveFiles@2
