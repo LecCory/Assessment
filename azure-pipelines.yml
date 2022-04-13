@@ -43,6 +43,7 @@ stages:
 
     - script: |
         npm install typescript -g
+        npm install @azure/functions -g
         npm install $(Build.SourcesDirectory)/api
         (cd $(Build.SourcesDirectory)/api && npm run build --if-present)    
         (cd $(Build.SourcesDirectory)/api && npm run test --if-present)  
