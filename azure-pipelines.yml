@@ -30,7 +30,7 @@ stages:
       - task: AzureCLI@2
         inputs:
           azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-          scriptType: 'ps'
+          scriptType: bash
           scriptLocation: 'inlineScript'
           inlineScript: 'az deployment sub create -l canadacentral -f $(Build.SourcesDirectory)/bicep/main.bicep'
 
