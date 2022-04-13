@@ -1,8 +1,8 @@
-param location string = 'canadacentral'
+
 
 @minLength(3)
 @maxLength(24)
-param name string = 'sacoryleclair002'
+param storageAccountName string
 
 @allowed([
   'Premium_LRS'
@@ -12,14 +12,17 @@ param name string = 'sacoryleclair002'
   'Standard_RAGRS'
   'Standard_ZRS'
 ])
-param type string = 'Standard_GRS'
+param type string = 'Standard_LRS'
 
 var containerName = 'images'
 
+param storageLocation string 
+
+
 
 resource stacc 'Microsoft.Storage/storageAccounts@2020-08-01-preview' = {
-  name: name
-  location: location
+  name: storageAccountName
+  location: storageLocation
   kind: 'StorageV2'
   sku: {
     name: type
@@ -27,7 +30,9 @@ resource stacc 'Microsoft.Storage/storageAccounts@2020-08-01-preview' = {
 }
 
 resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2020-08-01-preview' ={
+
   name: '${stacc.name}/default/${containerName}'
 }
 
 output storageId string = stacc.id
+output storage object = stacc

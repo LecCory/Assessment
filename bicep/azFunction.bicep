@@ -1,42 +1,54 @@
-param location string = 'canadacentral'
-
-resource azureFunction 'Microsoft.Web/sites@2020-12-01' = {
-  name: 'clapptest0001'
+param appName string
+param location string = resourceGroup().location
+param storageAccount object
+param storageName string
+param storageID string
+param appInsights object
+param hostingPlan string
+var functionAppName = appName
+resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
+  name: functionAppName
   location: location
   kind: 'functionapp'
   properties: {
-    serverFarmId: 'serverfarms.id'
+    
+    httpsOnly: true
+    serverFarmId: hostingPlan
+    clientAffinityEnabled: true
     siteConfig: {
       appSettings: [
         {
-          name: 'AzureWebJobsDashboard'
-          value: 'DefaultEndpointsProtocol=https;AccountName=storageAccountName1;AccountKey=${listKeys('storageAccountID1', '2019-06-01').key1}'
+          'name': 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          'value': appInsights.properties.InstrumentationKey
         }
         {
           name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=storageAccountName2;AccountKey=${listKeys('storageAccountID2', '2019-06-01').key1}'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageID, storageAccount.apiVersion).keys[0].value}'
+        }
+        {
+          'name': 'FUNCTIONS_EXTENSION_VERSION'
+          'value': '~2'
+        }
+        {
+          'name': 'FUNCTIONS_WORKER_RUNTIME'
+          'value': 'dotnet'
         }
         {
           name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
-          value: 'DefaultEndpointsProtocol=https;AccountName=storageAccountName3;AccountKey=${listKeys('storageAccountID3', '2019-06-01').key1}'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageID, storageAccount.apiVersion).keys[0].value}'
         }
         {
           name: 'WEBSITE_CONTENTSHARE'
-          value: toLower('name')
+          value: toLower(functionAppName)
         }
-        {
-          name: 'FUNCTIONS_EXTENSION_VERSION'
-          value: '~2'
-        }
-        {
-          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-          value: reference('insightsComponents.id', '2015-05-01').InstrumentationKey
-        }
-        {
-          name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'dotnet'
-        }
+        // WEBSITE_CONTENTSHARE will also be auto-generated - https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_contentshare
+        // WEBSITE_RUN_FROM_PACKAGE will be set to 1 by func azure functionapp publish
       ]
     }
   }
 }
+
+
+
+
+
