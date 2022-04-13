@@ -11,10 +11,10 @@ variables:
   azureSubscription: 'e9df22f4-ef3b-492a-aabf-7d9afa1a3b76'
 
   # Function app name
-  functionAppName: ''
+  functionAppName: 'clapptest0001'
 
   # Environment name
-  environmentName: ''
+  environmentName: 'dev'
 
   # Agent VM image name
   vmImageName: 'SelfPool'
