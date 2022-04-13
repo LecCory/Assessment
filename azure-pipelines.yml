@@ -20,6 +20,20 @@ variables:
  
 
 stages:
+- stage: IaC
+  displayName: Create resources
+  pool:
+      name: SelfPool
+  jobs:
+    - job: CreateResources
+      steps:    
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+          scriptType: 'ps'
+          scriptLocation: 'inlineScript'
+          inlineScript: 'az deployment sub create -l canadacentral -f $(Build.SourcesDirectory)/bicep/main.bicep'
+
 - stage: Build
   displayName: Build stage
   jobs:
