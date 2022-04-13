@@ -1,0 +1,32 @@
+.DS_Store
+
+.vscode
+
+**/dist
+**/node_modules
+
+/ui/tests/e2e/videos/
+/api/tests/e2e/videos/
+
+# local env files
+**/.env.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# Ignore sourcemap files
+*.map
+**/tests/**/*.spec.js
+**/src/**/*.js
+api/.env

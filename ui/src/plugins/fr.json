@@ -1,0 +1,88 @@
+{
+  "navigation": {
+    "appName": "Évaluation des normes relatives au numérique",
+    "viewSectionResults": "Voir les résultats",
+    "chooseAnotherSection": "Choisir une autre section",
+    "viewAllResults": "Tous les résultats",
+    "viewTeamResults": "Résultats de l'équipe",
+    "goBack": "Retour",
+    "goHome": "Accueil",
+    "survey": "Sondage",
+    "teamsSurvey": "Résultats de l'équipe"
+  },
+  "notice": {
+    "startUsingTitle": "Commencez votre auto-évaluation des normes numériques",
+    "startUsingDesc": "Vous ne savez pas ce qu'est l'outil d'évaluation des normes numériques? Continuez [lire ci-dessous] (#Titre message de bienvenue). ",
+    "takeTheSurvey": "Faire l'évaluation",
+    "takeTheSurveyDesc": "Cliquez [ici](#/survey), ou sur « Sondage » dans la barre de menus supérieure pour commencer le sondage.",
+    "calculateTeamResults": "Calculer les résultats de l'équipe",
+    "calculateTeamResultsDesc": "Cliquez [ici](#/teamSurveys) ou sur « Résultats de l'équipe » dans la barre de menus supérieure pour commencer à calculer les résultats de l'équipe.",
+    "welcomeNoticeTitle": "Bienvenue à l'outil d'autoévaluation des normes relatives au numérique!",
+    "subtitle1": "Avec cet outil, vous pouvez :",
+    "section1p1": "Mesurer la croissance et la réussite personnelles",
+    "section1p2": "Vous pouvez comparer les résultats de tests précédents aux résultats de tests actuels pour voir votre croissance personnelle au fil du temps.",
+    "section1p3": "Mesurer la croissance et la réussite des équipes",
+    "section1p4": "Vous pouvez calculer les résultats des équipes et évaluer leur croissance et leur réussite globales ou les comparer aux résultats des tests précédents de vos équipes.",
+    "subtitle2": "Temps requis :",
+    "section2p1": "Vous n'êtes pas tenu de répondre à chaque section en une seule visite, mais nous encourageons les équipes à y répondre au complet au moins une fois de manière à créer une base de référence complète.",
+    "section2p2": "Environ 5 minutes par section",
+    "section2p3": "Environ 50 minutes pour répondre aux 10 sections",
+    "subtitle3": "Avis de confidentialité :",
+    "section3p1": "Cache du navigateur",
+    "section3p2": "Les réponses à l'auto-évaluation sur DevOps sont stockées localement sur votre ordinateur (mémoire cache du navigateur), et le gouvernement du Canada ne sauvegarde aucune information.",
+    "welcomeNoticeBody": "L'outil suivant est basé sur le directive des normes relatives au numérique qui a été publié en 2021. \n\nCet outil **soutiendra les équipes dans l'intégration des normes numériques dans leurs méthodes de travail**. \n\nLes équipes sont invitées à remplir l'auto-évaluation tous les 6 (six) à 12 (douze) mois **pour mesurer leurs progrès**. Toutefois, vous êtes libre d'utiliser l'outil tout au long de l'année, que ce soit en équipe ou individuellement.",
+    "noProgress": "L'auto-évaluation DevOps n'a pas encore commencée. Veuillez choisir une section à compléter."
+  },
+  "downloadUploadSurvey": {
+    "title": "Téléverser le sondage",
+    "fileName": "Nom du fichier :",
+    "surveyData": "Veuillez télécharger un fichier de sondage",
+    "OK": "OK",
+    "cancel": "Annuler",
+    "format": "En format convenable",
+    "browse": "Parcourir",
+    "uploadSurvey": "Téléverser le sondage",
+    "downloadSurvey": "Télécharger le sondage complet",
+    "inputFileName": "Veuillez saisir un nom de fichier",
+    "downloadTitle": "Télécharger le sondage"
+  },
+  "validation": {
+    "file": {
+      "required": "Veuillez télécharger un fichier de données de sondage",
+      "format": "%{fileName} - Ce fichier est au mauvais format",
+      "differentFormat": "Le format des fichiers téléchargés est différent"
+    },
+    "fileName": {
+      "required": "Veuillez saisir un nom de fichier"
+    }
+  },
+  "showHideLink": {
+    "show": "Afficher",
+    "hide": "Masquer"
+  },
+  "buttons": {
+    "startAgain": "Recommencer",
+    "saveButton": "Sauvegarder",
+    "submitButton": "Soumettre vos résultats"
+  },
+  "htmlCode": "fr-CA",
+  "survey": {
+    "currentScore": "Cote actuelle",
+    "currentSurveyResults": "Résultats actuels du sondage",
+    "sectionResultsTitle": "Résultats pour la section"
+  },
+  "teamResults": {
+    "title": "Aperçu des résultats de l'équipe",
+    "description": "Les résultats s'afficheront ci-dessous une fois que vous aurez téléversé un ou plusieurs sondages.",
+    "uploadSurveys": "Téléverser le ou les sondages",
+    "calcResults": "Calculer les résultats",
+    "teamName": "Nom de l'équipe",
+    "teamNamePlaceholder": "Veuillez entrer un nom d'équipe",
+    "teamNameRequired": "Le nom de l'équipe est obligatoire",
+    "deleteTeam": "Cliquez pour supprimer cette équipe",
+    "showIndividualBreakdownInstruction": "**REMARQUE** : Cliquez sur le nom de l'équipe pour afficher la répartition individuelle.",
+    "showIndividualBreakdown": "Cliquez pour afficher la répartition individuelle.",
+    "hideIndividualBreakdown": "Masquer la répartition individuelle.",
+    "actions": "Actions"
+  }
+}

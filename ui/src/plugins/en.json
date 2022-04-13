@@ -1,0 +1,88 @@
+{
+  "navigation": {
+    "appName": "Digital Standards Self-Assessment",
+    "viewSectionResults": "Show results",
+    "chooseAnotherSection": "Choose Another Section",
+    "viewAllResults": "View All Results",
+    "viewTeamResults": "Calculate Team Results",
+    "goBack": "Back",
+    "goHome": "Home",
+    "survey": "Survey",
+    "teamsSurvey": "Team Results"
+  },
+  "notice": {
+    "startUsingTitle": "Start your Digital Standards Self Assessment",
+    "startUsingDesc": "Not sure what the Digital Standards assessment tool is? Continue [reading below](#welcomeNoticeTitle).",
+    "takeTheSurvey": "Take assessment",
+    "takeTheSurveyDesc": "Click [here](#/survey), or click “Survey” in the top menu bar to start the survey.",
+    "calculateTeamResults": "Calculate Team Results",
+    "calculateTeamResultsDesc": "Click [here](#/teamSurveys), or click “Team results” in the top menu bar to start calulating team results.",
+    "welcomeNoticeTitle": "What is the Digital Standards Self-Assessment tool?",
+    "subtitle1": "With this tool you can:",
+    "section1p1": "Measure Personal growth and success",
+    "section1p2": "You can compare previous test results to current test results to see your personal growth over time.",
+    "section1p3": "Measure Teams growth and success",
+    "section1p4": "You can calulate teams results and can evaluate the teams overall growth and success or compare to your teams previous test results.",
+    "subtitle2": "Time required:",
+    "section2p1": "You are not required to answer each section in a single visit, but we encourage teams to complete them all at least once to establish a full baseline.",
+    "section2p2": "About 5 minutes per section",
+    "section2p3": "Approx. 50 minutes to complete all 10 sections",
+    "subtitle3": "Privacy Notice:",
+    "section3p1": "Browser Cache",
+    "section3p2": "Responses to the Digital Standards Self-Assessment are stored locally on your computer (browser's cache), and the Government of Canada does not save any information.",
+    "welcomeNoticeBody": "The following tool is based on the Digital Standards playbook that was published in 2021. \n\nThis tool will **support teams in the integration of the Digital Standards into their ways of working.** \n\nTeams are invited to complete the self-assesment every 6 (six) to 12 (twelve) months **to measure their progress**. However, you may use the tool at your discretion all year around as a team or individually.",
+    "noProgress": "The Digital Standards self-assessment has not yet started. Please choose a section to complete."
+  },
+  "downloadUploadSurvey": {
+    "title": "Upload Survey",
+    "fileName": "File Name:",
+    "surveyData": "Please upload a survey file",
+    "OK": "OK",
+    "cancel": "Cancel",
+    "format": "In Pretty Format",
+    "browse": "Browse",
+    "uploadSurvey": "Upload Survey",
+    "downloadSurvey": "Download Full Survey",
+    "inputFileName": "Please enter a file name",
+    "downloadTitle": "Download Survey"
+  },
+  "validation": {
+    "file": {
+      "required": "Please upload a survey data file",
+      "format": "%{fileName} - This file is in the wrong format",
+      "differentFormat": "The format of uploaded files are different"
+    },
+    "fileName": {
+      "required": "Please input a file name"
+    }
+  },
+  "showHideLink": {
+    "show": "Show",
+    "hide": "Hide"
+  },
+  "buttons": {
+    "startAgain": "Start Again",
+    "saveButton": "Save",
+    "submitButton": "Submit your results"
+  },
+  "htmlCode": "en-CA",
+  "survey": {
+    "currentScore": "Current Score",
+    "currentSurveyResults": "Current Survey Results",
+    "sectionResultsTitle": "Section Results"
+  },
+  "teamResults": {
+    "title": "Team Results Overview",
+    "description": "Results will apear below once you have uploaded 1 or more survey(s).",
+    "uploadSurveys": "Upload Survey(s)",
+    "calcResults": "Calculate Results",
+    "teamName": "Team Name",
+    "teamNamePlaceholder": "Please enter a team name",
+    "teamNameRequired": "Team name is mandatory",
+    "deleteTeam": "Click to delete this team",
+    "showIndividualBreakdownInstruction": "**NOTE**: Click on team name to show individual breakdown",
+    "showIndividualBreakdown": "Click to show individual breakdown",
+    "hideIndividualBreakdown": "Hide individual breakdown",
+    "actions": "Actions"
+  }
+}
