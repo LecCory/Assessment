@@ -17,7 +17,7 @@ variables:
   environmentName: 'dev'
 
   # Agent VM image name
-  vmImageName: 'SelfPool'
+ 
 
 stages:
 - stage: Build
@@ -26,7 +26,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+      name: SelfPool
 
     steps:
     - task: NodeTool@0
@@ -68,7 +68,7 @@ stages:
     displayName: Deploy
     environment: $(environmentName)
     pool:
-      vmImage: $(vmImageName)
+      name: SelfPool
     strategy:
       runOnce:
         deploy:
