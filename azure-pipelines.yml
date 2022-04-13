@@ -33,7 +33,7 @@ stages:
           scriptType: bash
           scriptLocation: 'inlineScript'
           inlineScript: |
-            'az group create -n rgcoryleclair002 -l canadacentral 
+            'az group create -n rgcoryleclair002 -l canadacentral' 
             'az deployment group create -n myapp --resource-froup rgcoryleclair002 -f $(Build.SourcesDirectory)/bicep/main.bicep -p "appName=clfapp001"'
 
 - stage: Build
