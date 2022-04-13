@@ -42,9 +42,9 @@ stages:
       displayName: 'Build extensions'
 
     - script: |
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+        npm install $(Build.SourcesDirectory)/api
+        npm $(Build.SourcesDirectory)/api run build --if-present 
+        npm $(Build.SourcesDirectory)/api run test --if-present
       displayName: 'Prepare binaries'
 
     - task: ArchiveFiles@2
