@@ -50,9 +50,10 @@ stages:
       name: SelfPool
 
     steps:
+
     - task: NodeTool@0
       inputs:
-        versionSpec: '10.x'
+        versionSpec: '16.x'
       displayName: 'Install Node.js'
 
 # (cd $(Build.SourcesDirectory)/api && npm run build --if-present)    
