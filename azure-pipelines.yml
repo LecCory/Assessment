@@ -97,4 +97,5 @@ stages:
               azureSubscription: '$(azureSubscription)'
               appType: functionAppLinux
               appName: $(functionAppName)
+              deploymentMethod: auto
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
