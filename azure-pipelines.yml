@@ -62,7 +62,7 @@ stages:
     - script: |
         cd $(Build.SourcesDirectory)/api
         npm install -g typescript
-        npm install 
+        npm $(Build.SourcesDirectory)/api install 
         npm run build --verbose
         
       displayName: 'Prepare binaries'
