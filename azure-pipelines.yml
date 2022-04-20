@@ -55,14 +55,15 @@ stages:
         versionSpec: '10.x'
       displayName: 'Install Node.js'
 
-
+# (cd $(Build.SourcesDirectory)/api && npm run build --if-present)    
+# (cd $(Build.SourcesDirectory)/api && npm run test --if-present)  
 
     - script: |
         npm install typescript -g
         npm install @azure/functions -g
         npm install $(Build.SourcesDirectory)/api
-        (cd $(Build.SourcesDirectory)/api && npm run build --if-present)    
-        (cd $(Build.SourcesDirectory)/api && npm run test --if-present)  
+        npm run build --if-present --prefix $(Build.SourcesDirectory)/api
+        
       displayName: 'Prepare binaries'
 
     - task: ArchiveFiles@2
