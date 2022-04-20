@@ -59,17 +59,16 @@ stages:
 # (cd $(Build.SourcesDirectory)/api && npm run test --if-present)  
 
     - script: |
-        npm install typescript -g
-        npm install @azure/functions -g
-        npm install $(Build.SourcesDirectory)/api
-        npm run build --if-present --prefix $(Build.SourcesDirectory)/api
+        cd $(Build.SourcesDirectory)/api
+        npm install 
+        npm run build --if-present 
         
       displayName: 'Prepare binaries'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)/api'
+        rootFolderOrFile: '$(Build.SourcesDirectory)/api/dist'
         includeRootFolder: false
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
