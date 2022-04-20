@@ -68,7 +68,7 @@ stages:
 
     - script: |
 
-        npm run-script build --verbose
+        npm run build --verbose
         
       displayName: 'Prepare binaries'
 
