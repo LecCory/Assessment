@@ -37,7 +37,7 @@ stages:
   
         inputs:
           azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-          scriptType: 'bash'
+          scriptType: bash
           scriptLocation: 'inlineScript'
           inlineScript: 'az deployment group create -n myapp --resource-group rgcoryleclair002 -f $(Build.SourcesDirectory)/bicep/main.bicep -p "appName=clfapp001"'
 
