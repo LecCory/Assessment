@@ -68,7 +68,7 @@ stages:
 
     - script: |
 
-        npm run build --verbose
+        npm --prefix $(Build.SourcesDirectory)/api run build --verbose
         
       displayName: 'Prepare binaries'
 
