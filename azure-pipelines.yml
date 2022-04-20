@@ -105,4 +105,4 @@ stages:
               appName: 'clapptest0001'
            
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              deploymentMethod: zipDeploy
+              
