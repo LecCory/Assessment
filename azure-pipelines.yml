@@ -58,12 +58,17 @@ stages:
 
 # (cd $(Build.SourcesDirectory)/api && npm run build --if-present)    
 # (cd $(Build.SourcesDirectory)/api && npm run test --if-present)  
+    #     cd $(Build.SourcesDirectory)/api
+    #     npm install -g typescript
+    #     npm $(Build.SourcesDirectory)/api install 
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: '$(Build.SourcesDirectory)/api'
 
     - script: |
-        cd $(Build.SourcesDirectory)/api
-        npm install -g typescript
-        npm $(Build.SourcesDirectory)/api install 
-        npm run build --verbose
+
+        npm run-script build --verbose
         
       displayName: 'Prepare binaries'
 
