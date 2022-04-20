@@ -31,7 +31,7 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
         }
         {
           'name': 'FUNCTIONS_WORKER_RUNTIME'
-          'value': 'typescript'
+          'value': 'node'
         }
         {
           name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
