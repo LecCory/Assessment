@@ -103,6 +103,7 @@ stages:
               azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
               appType: 'functionApp'
               appName: 'clapptest0001'
-           
+
+              deploymentMethod: runFromPackage
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               
