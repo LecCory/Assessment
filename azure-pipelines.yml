@@ -61,7 +61,7 @@ stages:
     - script: |
         cd $(Build.SourcesDirectory)/api
         npm install 
-        npm run build --if-present 
+        npm run build
         
       displayName: 'Prepare binaries'
 
