@@ -8,8 +8,8 @@ trigger:
 
 pool:
   vmImage: SelfPool
-  demands:
-   - agent.name -equals cl-ubuntu
+  demands: 
+  - agent.name -equals cl-ubuntu
 
 steps:
 - task: NodeTool@0
