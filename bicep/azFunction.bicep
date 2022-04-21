@@ -1,5 +1,6 @@
-param appName string
+
 param location string = resourceGroup().location
+param appName string
 param storageAccount object
 param storageName string
 param storageID string
@@ -10,12 +11,19 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
   name: functionAppName
   location: location
   kind: 'functionapp'
+  
   properties: {
     
     httpsOnly: true
     serverFarmId: hostingPlan
     clientAffinityEnabled: true
+    
     siteConfig: {
+    cors:{
+      allowedOrigins: [
+        'https://portal.azure.com'
+      ]
+    }
       appSettings: [
         {
           'name': 'APPINSIGHTS_INSTRUMENTATIONKEY'
@@ -27,8 +35,12 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
         }
         {
           'name': 'FUNCTIONS_EXTENSION_VERSION'
-          'value': '~2'
+          'value': '~3'
         }
+        {
+          'name': 'WEBSITE_NODE_DEFAULT_VERSION'
+          'value': '~16'
+      }
         {
           'name': 'FUNCTIONS_WORKER_RUNTIME'
           'value': 'node'
@@ -41,14 +53,11 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
           name: 'WEBSITE_CONTENTSHARE'
           value: toLower(functionAppName)
         }
+
         // WEBSITE_CONTENTSHARE will also be auto-generated - https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_contentshare
         // WEBSITE_RUN_FROM_PACKAGE will be set to 1 by func azure functionapp publish
-      ]
+      ]     
     }
   }
 }
-
-
-
-
 
