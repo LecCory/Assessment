@@ -1,17 +1,21 @@
 
 param location string = resourceGroup().location
-param appName string
+// param appName string
 param storageAccount object
 param storageName string
 param storageID string
 param appInsights object
 param hostingPlan string
+param utcTime string = utcNow()
+
 var functionAppName = 'clapptest0001'
 resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
   name: functionAppName
   location: location
   kind: 'functionapp'
-  
+  tags:{
+    'dateCreated': utcTime
+  }
   properties: {
     
     httpsOnly: true

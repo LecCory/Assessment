@@ -1,5 +1,6 @@
 
 param appName string
+param existOrNew bool = true
 param storageName string = 'stccory0001'
 param location  string = resourceGroup().location
 
@@ -31,7 +32,7 @@ module hostingPlan 'hostingplan.bicep' ={
   }
 }
 
-module azFunction 'azFunction.bicep' ={
+module azFunction 'azFunction.bicep'  = if (existOrNew){
   dependsOn: [
     storageAcct
     appInsights
@@ -41,9 +42,9 @@ module azFunction 'azFunction.bicep' ={
 
 
   params: {
-  
+    
     appInsights: appInsights.outputs.appInsights
-    appName: appName
+    // appName: appName
     hostingPlan: hostingPlan.outputs.hostingPlanID
     storageName: storageName
     storageAccount: storageAcct.outputs.storage
@@ -53,7 +54,7 @@ module azFunction 'azFunction.bicep' ={
   }
 }
 
-module cosmosDB 'cosmos.bicep' ={
+module cosmosDB 'cosmos.bicep' = if(existOrNew){
   name: 'cosmosDB'
   params:{
     location: location
