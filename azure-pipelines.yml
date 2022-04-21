@@ -24,6 +24,7 @@ stages:
   displayName: Create resources
   pool:
       name: SelfPool
+      demands: Agent.Name -equals cl-ubuntu
   jobs:
     - job: CreateResources
       steps:    
@@ -48,6 +49,7 @@ stages:
     displayName: Build
     pool:
       name: SelfPool
+      demands: Agent.Name -equals cl-ubuntu
 
     steps:
 
