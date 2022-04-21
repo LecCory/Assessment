@@ -53,10 +53,10 @@ module azFunction 'azFunction.bicep' ={
   }
 }
 
-// module cosmosDB 'cosmos.bicep' ={
-//   name: 'cosmosDB'
-//   params:{
-//     location: location
-//     appName: appName
-//   }
-// }
+module cosmosDB 'cosmos.bicep' ={
+  name: 'cosmosDB'
+  params:{
+    location: location
+    appName: appName
+  }
+}
