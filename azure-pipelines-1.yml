@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: SelfPool
+  name: SelfPool
   demands: Agent.Name -equals cl-ubuntu
 
 steps:
