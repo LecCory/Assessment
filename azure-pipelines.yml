@@ -86,25 +86,25 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
 
-# - stage: Deploy
-#   displayName: Deploy stage
-#   dependsOn: Build
-#   condition: succeeded()
-#   jobs:
-#   - deployment: Deploy
-#     displayName: Deploy
-#     environment: $(environmentName)
-#     pool:
-#       name: SelfPool
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - task: AzureRmWebAppDeployment@4
-#             inputs:
-#               ConnectionType: 'AzureRM'
-#               azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-#               appType: 'functionApp'
-#               WebAppName: 'clapptest0001'
-#               DeploymentType: webDeploy
-#               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    environment: $(environmentName)
+    pool:
+      name: SelfPool
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: AzureFunctionApp@1
+            inputs:
+              azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+              appType: 'functionApp'
+              appName: 'clfunctionapp001'
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              deploymentMethod: 'auto'
