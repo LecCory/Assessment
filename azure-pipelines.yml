@@ -96,6 +96,7 @@ stages:
   displayName: Deploy stage
   dependsOn: 
    - Build
+   - IaC
   condition: succeeded()
   variables:
    keys: $[ IaC.CreateResources.keyVar.outputs['keyVar.mongoKey'] ]
