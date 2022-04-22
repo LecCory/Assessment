@@ -18,7 +18,7 @@ variables:
 
   # Agent VM image name
  
-
+  
 stages:
 - stage: IaC
   displayName: Create resources
@@ -41,7 +41,12 @@ stages:
           scriptType: bash
           scriptLocation: 'inlineScript'
           inlineScript: 'az deployment group create -n myapp --resource-group rgcoryleclair002 -f "$(Build.SourcesDirectory)/bicep/main.bicep" -p "appName=clfapp001"'
-
+      - task: CmdLine@2
+        inputs:
+          script: |
+            keys = az cosmosdb keys list --name clfapp001uj5oeplscvwcu --resource-group rgcoryleclair002 --type keys --output json | ConvertFrom-json | Select-Object -ExpandProperty primaryMasterKey
+            echo "##vso[task.setvariable variable=mongoKey;isOutput=true]$keys"
+        name: keyVar
 - stage: Build
   displayName: Build stage
   jobs:
@@ -87,9 +92,13 @@ stages:
       artifact: drop
 
 - stage: Deploy
+
   displayName: Deploy stage
-  dependsOn: Build
+  dependsOn: 
+   - Build
   condition: succeeded()
+  variables:
+   keys: $[ IaC.CreateResources.keyVar.outputs['keyVar.mongoKey'] ]
   jobs:
   - deployment: Deploy
     displayName: Deploy
