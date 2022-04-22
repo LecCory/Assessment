@@ -70,3 +70,54 @@ resource mongoDb 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases@2021-06
     options: {}
   }
 }
+
+resource mongo_collection 'Microsoft.DocumentDB/databaseAccounts/mongodbDatabases/collections@2021-11-15-preview' = {
+  parent: mongoDb
+  name: 'collection'
+  
+  properties: {
+    resource: {
+      id: 'collection'
+      shardKey: {
+        user_id: 'Hash'
+      }
+      indexes: [
+        {
+          key: {
+            keys: [
+              '_id'
+            ]
+          }
+        }
+        {
+          key: {
+            keys: [
+              '$**'
+            ]
+          }
+        }
+        {
+          key: {
+            keys: [
+              'user_id'
+              'user_address'
+            ]
+          }
+          options: {
+            unique: true
+          }
+        }
+        {
+          key: {
+            keys: [
+              '_ts'
+            ]
+            
+          }
+        }
+      ]
+      
+    }
+  }
+}
+
