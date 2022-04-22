@@ -94,7 +94,7 @@ stages:
 - stage: Deploy
 
   displayName: Deploy stage
-  dependsOn: |
+  dependsOn: 
    - Build
   condition: succeeded()
   variables:
