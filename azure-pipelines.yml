@@ -99,7 +99,7 @@ stages:
    - IaC
   condition: succeeded()
   variables:
-   keys: $[ IaC.CreateResources.keyVar.outputs['keyVar.mongoKey'] ]
+   keys: $[ stageddependencies.IaC.CreateResources.keyVar.outputs['keyVar.mongoKey'] ]
   jobs:
   - deployment: Deploy
     displayName: Deploy
