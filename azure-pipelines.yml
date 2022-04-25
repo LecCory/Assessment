@@ -120,9 +120,9 @@ stages:
 - stage: Deploy
 
   displayName: Deploy stage
-  dependsOn: Build
+  # dependsOn: Build
   #  - IaC
-  condition: succeeded()
+  # condition: succeeded()
   # variables:
   #  keys: $[ stageDependencies.IaC.CreateResources.keyVar.outputs['keyVar.mongoKey'] ]
   jobs:
@@ -132,10 +132,6 @@ stages:
     pool:
         name: SelfPool
         demands: Agent.Name -equals DESKTOP-RSIKN6Q
-
-
-        
-
         steps:
           - task: AzureFunctionApp@1
             inputs:
