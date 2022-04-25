@@ -126,9 +126,9 @@ stages:
   # variables:
   #  keys: $[ stageDependencies.IaC.CreateResources.keyVar.outputs['keyVar.mongoKey'] ]
   jobs:
-  - deployment: Deploy
+  - job: Deploy
     displayName: Deploy
-    environment: $(environmentName)
+    
     pool:
         name: SelfPool
         demands: Agent.Name -equals DESKTOP-RSIKN6Q
