@@ -85,7 +85,7 @@ stages:
         rootFolderOrFile: '$(Build.SourcesDirectory)/api/'
         includeRootFolder: false
         archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/API-(Build.BuildId).zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/API-$(Build.BuildId).zip
         replaceExistingArchive: true
 
     - task: Npm@1
