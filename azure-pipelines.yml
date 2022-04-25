@@ -132,6 +132,7 @@ stages:
     environment: $(environmentName)
     pool:
         name: SelfPool
+        demands: Agent.Name -equals DESKTOP-RSIKN6Q
     strategy:
       runOnce:
         deploy:
