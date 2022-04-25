@@ -119,9 +119,6 @@ stages:
 
 - stage: Deploy
 
-  pool:
-      name: SelfPool
-      demands: Agent.OS -equals Windows_NT
   displayName: Deploy stage
   dependsOn: 
    - Build
@@ -133,7 +130,8 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     environment: $(environmentName)
-
+    pool:
+        name: SelfPool
     strategy:
       runOnce:
         deploy:
