@@ -111,7 +111,7 @@ stages:
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)/ui/dist'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/dist'
         
 
     - upload: $(Build.ArtifactStagingDirectory)/
