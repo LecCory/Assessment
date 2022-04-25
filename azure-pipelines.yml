@@ -54,8 +54,6 @@ stages:
     displayName: Build
     pool:
       name: SelfPool
-      
-
     steps:
 
     - task: NodeTool@0
