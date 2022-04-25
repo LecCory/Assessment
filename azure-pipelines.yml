@@ -107,7 +107,7 @@ stages:
         archiveFile: $(Build.ArtifactStagingDirectory)/UI-$(Build.BuildId).zip
         replaceExistingArchive: true
 
-    - upload: $(Build.ArtifactStagingDirectory)/*
+    - upload: $(Build.ArtifactStagingDirectory)/
       artifact: drop
 
 - stage: Deploy
