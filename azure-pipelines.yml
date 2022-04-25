@@ -110,22 +110,22 @@ stages:
     displayName: Deploy
     pool:
       name: SelfPool
-      steps:
-          - task: AzureFunctionApp@1
-            inputs:
-              azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-              appType: 'functionApp'
-              appName: 'clapptest0001'
-              package: '$(Pipeline.Workspace)/drop/API-$(Build.BuildId).zip'
-              deploymentMethod: 'auto'
-            displayName: Deploy API Funtions
+    steps:
+      - task: AzureFunctionApp@1
+        inputs:
+          azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+          appType: 'functionApp'
+          appName: 'clapptest0001'
+          package: '$(Pipeline.Workspace)/drop/API-$(Build.BuildId).zip'
+          deploymentMethod: 'auto'
+        displayName: Deploy API Funtions
 
-          - task: AzureFileCopy@4
-            inputs:
-              SourcePath: '$(Pipeline.Workspace)/drop/ui-$(Build.BuildId)/*'
-              azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-              Destination: 'AzureBlob'
-              storage: 'stccory0001'
-              ContainerName: '$web'
-            displayName: Deploy UI
-          
+      - task: AzureFileCopy@4
+        inputs:
+          SourcePath: '$(Pipeline.Workspace)/drop/ui-$(Build.BuildId)/*'
+          azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+          Destination: 'AzureBlob'
+          storage: 'stccory0001'
+          ContainerName: '$web'
+        displayName: Deploy UI
+        
