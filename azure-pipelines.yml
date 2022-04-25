@@ -121,15 +121,15 @@ stages:
           inputs:
             buildType: 'current'
             artifactName: 'drop'
-            targetPath: '$(Pipeline.Workspace)'
+            targetPath: '$(Pipeline.Workspace)/drop'
           
-        # - task: AzureFileCopy@4
-        #   inputs:
-        #     azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-        #     SourcePath: '$(Pipeline.Workspace)/drop/ui-$(Build.BuildId)/*'
-        #     Destination: AzureBlob
-        #     storage: 'stccory0001'
-        #     ContainerName: '$web'
+        - task: AzureFileCopy@4
+          inputs:
+            azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+            SourcePath: '$(Pipeline.Workspace)/drop/ui-$(Build.BuildId)/*'
+            Destination: AzureBlob
+            storage: 'stccory0001'
+            ContainerName: '$web'
 # - stage: Deployment
 #   displayName: Deployment stage
 #   jobs:
