@@ -85,7 +85,7 @@ stages:
         rootFolderOrFile: '$(Build.SourcesDirectory)/api/'
         includeRootFolder: false
         archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/$API-(Build.BuildId).zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/API-(Build.BuildId).zip
         replaceExistingArchive: true
 
     - task: Npm@1
@@ -98,14 +98,21 @@ stages:
         npm --prefix $(Build.SourcesDirectory)/ui run build --verbose
       displayName: 'Build UI'        
 
-    - task: ArchiveFiles@2
-      displayName: 'Archive files'
+    # - task: ArchiveFiles@2
+    #   displayName: 'Archive files'
+    #   inputs:
+    #     rootFolderOrFile: '$(Build.SourcesDirectory)/ui/dist'
+    #     includeRootFolder: false
+    #     archiveType: zip
+    #     archiveFile: $(Build.ArtifactStagingDirectory)/UI-$(Build.BuildId).zip
+    #     replaceExistingArchive: true
+
+    - task: CopyFiles@2
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)/ui/dist'
-        includeRootFolder: false
-        archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/UI-$(Build.BuildId).zip
-        replaceExistingArchive: true
+        SourceFolder: '$(Build.SourcesDirectory)/ui/dist'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/'
+        
 
     - upload: $(Build.ArtifactStagingDirectory)/
       artifact: drop
