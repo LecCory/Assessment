@@ -108,8 +108,13 @@ stages:
   displayName: Deployment
   jobs:
     - job: Deploy
+      strategy:
+        matrix:
+          DESKTOP-RSIKN6Q:
+            AGENT_NAME: 'DESKTOP-RSIKN6Q'
       pool:
         name: SelfPool
+        demands: Agent.Name -equals $(AGENT_NAME)
       steps:
 
         - task: DownloadPipelineArtifact@2
