@@ -121,7 +121,7 @@ stages:
 
   pool:
       name: SelfPool
-      demands: Agent.Name -equals DESKTOP-RSIKN6Q
+      demands: Agent.OS -equals Windows_NT
   displayName: Deploy stage
   dependsOn: 
    - Build
