@@ -118,7 +118,9 @@ stages:
       artifact: drop
 
 - stage: Deploy
-
+  pool:
+      name: SelfPool
+      demands: Agent.Name -equals DESKTOP-RSIKN6Q
   displayName: Deploy stage
   dependsOn: 
    - Build
