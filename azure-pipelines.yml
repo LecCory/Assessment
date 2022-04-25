@@ -111,7 +111,7 @@ stages:
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)/ui/dist'
         Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/dist'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/ui-$(Build.BuildId)'
         
 
     - upload: $(Build.ArtifactStagingDirectory)/
@@ -149,7 +149,7 @@ stages:
 
           - task: AzureFileCopy@4
             inputs:
-              SourcePath: '$(Pipeline.Workspace)/drop/UI-$(Build.BuildId).zip'
+              SourcePath: '$(Pipeline.Workspace)/drop/ui-$(Build.BuildId)/*'
               azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
               Destination: 'AzureBlob'
               storage: 'stccory0001'
