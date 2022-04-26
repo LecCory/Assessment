@@ -3,8 +3,7 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-trigger:
-- main
+trigger: none
 
 pool:
   name: SelfPool
@@ -19,4 +18,4 @@ steps:
       $context = Get-AzContext
       
       Write-Host "Hello"
-      Write-Host "$(context.Account.id)"
+      Write-Host $context
