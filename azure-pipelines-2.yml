@@ -17,6 +17,6 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       $context = Get-AzContext
-      $adosp = Get-AzADServicePrincipal -ApplicationId context.account.id
       
-      Write-Host $adsop
+      
+      Write-Host $context.Account.id
