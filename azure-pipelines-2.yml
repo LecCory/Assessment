@@ -15,7 +15,7 @@ steps:
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      $context = Get-AzContext
+      Get-AzContext
       
       Write-Host "Hello"
-      Write-Host $context
+      
