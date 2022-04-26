@@ -15,7 +15,7 @@ steps:
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      Get-AzContext
+      Get-AzContext | Select {$._Account.id}
       
       Write-Host "Hello"
       
