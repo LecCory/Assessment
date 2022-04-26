@@ -18,5 +18,5 @@ steps:
     inlineScript: |
       $context = Get-AzContext
       
-      
-      Write-Host $context.Account.id
+      Write-Host "Hello"
+      Write-Host "$(context.Account.id)"
