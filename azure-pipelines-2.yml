@@ -22,7 +22,7 @@ steps:
     PULUMI_ACCESS_TOKEN: $(pulumi)
   inputs:
     azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-    loginArgs: login
+    loginArgs: login https://app.pulumi.com
     command: 'up'
     args: '--yes -f'
     stack: 'devPOC'
