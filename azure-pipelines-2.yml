@@ -9,11 +9,12 @@ resources:
       endpoint: LecCory
       name: LecCory/pulumi-testing
 trigger: none
+pool:
+  name: SelfPool
 
 jobs:
 - job: infra
-  pool:
-    name: SelfPool
+
 
   steps:
   - checkout: pulumi-testing
