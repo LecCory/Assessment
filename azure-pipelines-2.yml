@@ -42,7 +42,7 @@ jobs:
     name: pulumi
 
 - job: deploy
-  condition: ne(dependencies.infra.outputs[pulumi.functionAppName], '')
+  condition: ne(dependencies.infra.outputs['pulumi.functionAppName'], '')
   dependsOn: infra
   variables:
     functionAppName: $[ dependencies.infra.outputs['pulumi.functionAppName'] ]
