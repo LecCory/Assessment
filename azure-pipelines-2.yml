@@ -2,13 +2,19 @@
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
+resources:
+  repositories:
+    - repository: pulumi-testing
+      type: github
+      endpoint: LecCory
+      name: LecCory/pulumi-testing
 trigger: none
 
 pool:
   name: SelfPool
 
 steps:
+- checkout: pulumi-testing
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
