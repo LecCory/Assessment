@@ -15,8 +15,11 @@ pool:
 
 steps:
 - checkout: pulumi-testing
+- checkout: self
 
-
+- task: Npm@1
+  inputs:
+    command: 'install'
 - task: Pulumi@1
   env:
     PULUMI_ACCESS_TOKEN: $(pulumi)
