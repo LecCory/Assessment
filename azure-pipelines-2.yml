@@ -10,47 +10,56 @@ resources:
       name: LecCory/pulumi-testing
 trigger: none
 
-pool:
-  name: SelfPool
+jobs:
+- job: infra
+  pool:
+    name: SelfPool
 
-steps:
-- checkout: pulumi-testing
-- checkout: self
+  steps:
+  - checkout: pulumi-testing
+  - checkout: self
 
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: pulumi-testing
-- task: Pulumi@1
-  env:
-    PULUMI_ACCESS_TOKEN: $(pulumi)
-  inputs:
-    azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-    cwd: $(Build.SourcesDirectory)\pulumi-testing
-    command: 'up'
-    args: '--yes -f'
-    stack: 'devPOC'
-    createStack: true
-  displayName: Standup Infrastructure
+  - task: Npm@1
+    inputs:
+      command: 'install'
+      workingDir: pulumi-testing
+  - task: Pulumi@1
+    env:
+      PULUMI_ACCESS_TOKEN: $(pulumi)
+    inputs:
+      azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+      cwd: $(Build.SourcesDirectory)\pulumi-testing
+      command: 'up'
+      args: '--yes -f'
+      stack: 'devPOC'
+      createStack: true
+    displayName: Standup Infrastructure
 
-- script: |
-    echo "##vso[task.setvariable variable=resourceGroupName;]$(pulumi stack output resourceGroupName)"
-    echo "##vso[task.setvariable variable=storageAccountName;]$(pulumi stack output saAccountName)"
-    echo "##vso[task.setvariable variable=functionAppName;]$(pulumi stack output faName)"
-  name: pulumiOutput
+  - script: |
+      echo "##vso[task.setvariable variable=resourceGroupName;isOutput=true]$(pulumi stack output resourceGroupName)"
+      echo "##vso[task.setvariable variable=storageAccountName;isOutput=true]$(pulumi stack output saAccountName)"
+      echo "##vso[task.setvariable variable=functionAppName;isOutput=true]$(pulumi stack output faName)"
+    name: pulumi
 
-- script: |
-    echo "${functionAppName}"
-  displayName: Create PipeLine variables
+- job: deploy
+  condition: ne(dependencies.infra.outputs[pulumi.functionAppName])
+  dependsOn: infra
+  variables:
+    functionAppName: $[ dependencies.infra.outputs['pulumi.functionAppName'] ]
+  steps:
+    
+  - script: |
+      echo "${functionAppName}"
+    displayName: Create PipeLine variables
 
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-    scriptType: 'ps'
-    workingDirectory: $(Build.SourcesDirectory)\Assessment\api
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      func azure functionapp publish $(functionAppName)
-      
-      
-      
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+      scriptType: 'ps'
+      workingDirectory: $(Build.SourcesDirectory)\Assessment\api
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        func azure functionapp publish $(functionAppName)
+        
+        
+        
