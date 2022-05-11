@@ -34,13 +34,13 @@ steps:
   displayName: Standup Infrastructure
 
 - script: |
-    Write-Host "##vso[task.setvariable variable=resourceGroupName;isOutput=true;]$(pulumi stack output resourceGroupName)"
-    Write-Host "##vso[task.setvariable variable=storageAccountName;isOutput=true;]$(pulumi stack output saAccountName)"
-    Write-Host "##vso[task.setvariable variable=functionAppName;isOutput=true;]$(pulumi stack output faName)"
+    echo "##vso[task.setvariable variable=resourceGroupName;isOutput=true;]$(pulumi stack output resourceGroupName)"
+    echo "##vso[task.setvariable variable=storageAccountName;isOutput=true;]$(pulumi stack output saAccountName)"
+    echo "##vso[task.setvariable variable=functionAppName;isOutput=true;]$(pulumi stack output faName)"
   name: pulumiOutput
 
 - script: |
-    Write-Host "$(functionAppName)"
+    echo "$(functionAppName)"
   displayName: Create PipeLine variables
 
 - task: AzureCLI@2
