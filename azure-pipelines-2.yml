@@ -39,19 +39,20 @@ jobs:
   - script: |
       echo "##vso[task.setvariable variable=resourceGroupName;isOutput=true]$(pulumi stack output resourceGroupName)"
       echo "##vso[task.setvariable variable=storageAccountName;isOutput=true]$(pulumi stack output saAccountName)"
-      echo "##vso[task.setvariable variable=functionAppName;isOutput=true]$(pulumi stack output faName)"
+      echo "##vso[task.setvariable variable=containerName;isOutput=true]$(pulumi stack output containerName)"
     name: pulumi
 
 - job: deploy
-  condition: ne(dependencies.infra.outputs['pulumi.functionAppName'], '')
+  condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
   dependsOn: infra
   variables:
-    functionAppName: $[ dependencies.infra.outputs['pulumi.functionAppName'] ]
+    functionAppName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
   steps:
-    
-  - script: |
-      echo "${functionAppName}"
-    displayName: Create PipeLine variables
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |     
+        Write-Host $(containerName)
 
   - task: AzureCLI@2
     inputs:
@@ -60,7 +61,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)\Assessment\api
       scriptLocation: 'inlineScript'
       inlineScript: |
-        func azure functionapp publish $(functionAppName)
+        func azure functionapp publish $(containerName)
         
         
         
