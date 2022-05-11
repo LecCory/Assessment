@@ -38,7 +38,8 @@ steps:
     echo "##vso[task.setvariable variable=storageAccountName;isOutput=true]$(pulumi stack output saAccountName)"
     echo "##vso[task.setvariable variable=functionAppName;isOutput=true]$(pulumi stack output faName)"
 
-    echo "$(functionAppName)"
+- script: |
+    echo $(functionAppName)
   displayName: Create PipeLine variables
 
 - task: AzureCLI@2
