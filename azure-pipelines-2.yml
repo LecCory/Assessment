@@ -46,7 +46,7 @@ jobs:
   condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
   dependsOn: infra
   variables:
-    functionAppName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
+    containerName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
   steps:
   - task: PowerShell@2
     inputs:
