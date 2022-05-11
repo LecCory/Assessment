@@ -34,22 +34,23 @@ steps:
   displayName: Standup Infrastructure
 
 - script: |
-    echo "##vso[task.setvariable variable=resourceGroupName;isOutput=true;]$(pulumi stack output resourceGroupName)"
-    echo "##vso[task.setvariable variable=storageAccountName;isOutput=true;]$(pulumi stack output saAccountName)"
-    echo "##vso[task.setvariable variable=functionAppName;isOutput=true;]$(pulumi stack output faName)"
+    echo "##vso[task.setvariable variable=resourceGroupName;]$(pulumi stack output resourceGroupName)"
+    echo "##vso[task.setvariable variable=storageAccountName;]$(pulumi stack output saAccountName)"
+    echo "##vso[task.setvariable variable=functionAppName;]$(pulumi stack output faName)"
   name: pulumiOutput
 
 - script: |
-    echo "$(functionAppName)"
+    echo "${functionAppName}"
   displayName: Create PipeLine variables
 
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
     scriptType: 'ps'
+    workingDirectory: $(Build.SourcesDirectory)\Assessment\api
     scriptLocation: 'inlineScript'
     inlineScript: |
-      Get-AzContext | Select-object -Property Account
+      func azure functionapp publish $(functionAppName)
       
-      Write-Host "Hello"
+      
       
