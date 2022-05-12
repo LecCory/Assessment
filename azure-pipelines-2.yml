@@ -53,7 +53,7 @@ stages:
   dependsOn: InfraSetup
 
   variables:
-    containerName: $[ stageDependencies.InfraSetup.infra.outputs['pulumi.containerName'] ]
+    containerName: $[ stageDependencies.InfraSetup.infra.outputs['pulumi.containerName'] ] 
   jobs:
   - job: deploy
 
