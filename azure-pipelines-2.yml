@@ -65,6 +65,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)\Assessment\api
       scriptLocation: 'inlineScript'
       inlineScript: |
+        ls
         func azure functionapp publish $(containerName)
         
         
