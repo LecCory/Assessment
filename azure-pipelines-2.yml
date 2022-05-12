@@ -61,12 +61,9 @@ jobs:
   - task: AzureCLI@2
     inputs:
       azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-      scriptType: 'ps'
-      workingDirectory: $(Build.SourcesDirectory)\Assessment\api
+      scriptType: 'bash'
       scriptLocation: 'inlineScript'
-      inlineScript: |
-        dir
-#func azure functionapp publish $(containerName)
-        
+      inlineScript: 'func azure functionapp publish $(containerName)'
+      workingDirectory: '$(Build.SourcesDirectory)\Assessment\api'
         
         
