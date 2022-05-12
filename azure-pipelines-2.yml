@@ -11,60 +11,64 @@ resources:
 trigger: none
 pool:
   name: SelfPool
+stages:
+- stage: InfraSetup
+  jobs:
+  - job: infra
 
-jobs:
-- job: infra
 
+    steps:
 
-  steps:
-  - checkout: pulumi-testing
-  - checkout: self
+    - checkout: pulumi-testing
+    - checkout: self
 
-  - task: Npm@1
-    inputs:
-      command: 'install'
-      workingDir: pulumi-testing
-  - task: Pulumi@1
-    env:
-      PULUMI_ACCESS_TOKEN: $(pulumi)
-    inputs:
-      azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-      cwd: $(Build.SourcesDirectory)\pulumi-testing
-      command: 'up'
-      args: '--yes -f'
-      stack: 'devPOC'
-      createStack: true
-      
-    displayName: Standup Infrastructure
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: pulumi-testing
+    - task: Pulumi@1
+      env:
+        PULUMI_ACCESS_TOKEN: $(pulumi)
+      inputs:
+        azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+        cwd: $(Build.SourcesDirectory)\pulumi-testing
+        command: 'up'
+        args: '--yes -f'
+        stack: 'devPOC'
+        createStack: true
         
-        Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
-        write-host $env:containerName
-    name: pulumi
+      displayName: Standup Infrastructure
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
+          
+          Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
+          write-host $env:containerName
+      name: pulumi
 
-- job: deploy
-  condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
-  dependsOn: infra
+- stage: Deploy
+  jobs:
+  - job: deploy
+    condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
+    dependsOn: infra
 
-  variables:
-    containerName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
-  steps:
-  - checkout: self
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |     
-        Write-Host $containerName
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        ls
-        func azure functionapp publish $(containerName)
-      workingDirectory: '$(Build.SourcesDirectory)\Assessment\api'
+    variables:
+      containerName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
+    steps:
+    - checkout: self
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |     
+          Write-Host $containerName
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          ls
+          func azure functionapp publish $(containerName)
+        workingDirectory: '$(Build.SourcesDirectory)\Assessment\api'
         
         
