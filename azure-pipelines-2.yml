@@ -50,10 +50,10 @@ stages:
 
 - stage: Deploy
   condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
-  dependsOn: infra
+  dependsOn: InfraSetup
 
   variables:
-    containerName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
+    containerName: $[ stageDependencies.InfraSetup.infra.outputs['pulumi.containerName'] ]
   jobs:
   - job: deploy
 
