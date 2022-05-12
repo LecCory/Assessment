@@ -52,7 +52,7 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |     
-        Write-Host $(containerName)
+        Write-Host $containerName
 
   - task: AzureCLI@2
     inputs:
