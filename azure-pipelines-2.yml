@@ -44,7 +44,7 @@ jobs:
         
         Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
         write-host $env:containerName
-        name: pulumi
+    name: pulumi
 
 - job: deploy
   condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
