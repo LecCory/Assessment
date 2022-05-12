@@ -57,13 +57,12 @@ jobs:
       targetType: 'inline'
       script: |     
         Write-Host $containerName
-
-  - task: AzureCLI@2
+  - task: PowerShell@2
     inputs:
-      azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-      scriptType: 'bash'
-      scriptLocation: 'inlineScript'
-      inlineScript: 'func azure functionapp publish $(containerName)'
+      targetType: 'inline'
+      script: |
+        ls
+        func azure functionapp publish $(containerName)
       workingDirectory: '$(Build.SourcesDirectory)\Assessment\api'
         
         
