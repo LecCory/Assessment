@@ -2,20 +2,77 @@
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
+resources:
+  repositories:
+    - repository: pulumi-testing
+      type: github
+      endpoint: LecCory
+      name: LecCory/pulumi-testing
 trigger: none
-
 pool:
   name: SelfPool
+stages:
+- stage: InfraSetup
+  jobs:
+  - job: infra
 
-steps:
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-    scriptType: 'ps'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      Get-AzContext | Select-object -Property Account
-      
-      Write-Host "Hello"
-      
+
+    steps:
+
+    - checkout: pulumi-testing
+    - checkout: self
+
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: pulumi-testing
+    - task: Pulumi@1
+      env:
+        PULUMI_ACCESS_TOKEN: $(pulumi)
+      inputs:
+        azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+        cwd: $(Build.SourcesDirectory)\pulumi-testing
+        command: 'up'
+        args: '--yes -f'
+        stack: 'devPOC'
+        createStack: true
+        
+      displayName: Standup Infrastructure
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
+          
+          Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
+          write-host $env:containerName
+      name: pulumi
+
+- stage: Deploy
+  
+  dependsOn: InfraSetup
+
+  variables:
+    containerName: $[ stageDependencies.InfraSetup.infra.outputs['pulumi.containerName'] ] 
+  jobs:
+  - job: deploy
+
+    steps:
+    - checkout: self
+  
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |     
+          pwd
+      displayName: List folder
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          cd api
+          func azure functionapp publish $(containerName) --force
+        
+        
+        
