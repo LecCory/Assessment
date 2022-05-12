@@ -72,7 +72,7 @@ stages:
         targetType: 'inline'
         script: |
           cd api
-          func azure functionapp publish $(containerName)
+          func azure functionapp publish $(containerName) --force
         
         
         
