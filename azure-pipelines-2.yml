@@ -34,12 +34,13 @@ jobs:
       args: '--yes -f'
       stack: 'devPOC'
       createStack: true
+      
     displayName: Standup Infrastructure
 
   - script: |
-      echo "##vso[task.setvariable variable=resourceGroupName;isOutput=true]$(pulumi stack output resourceGroupName)"
-      echo "##vso[task.setvariable variable=storageAccountName;isOutput=true]$(pulumi stack output saAccountName)"
-      echo "##vso[task.setvariable variable=containerName;isOutput=true]$(pulumi stack output containerName)"
+      echo "##vso[task.setvariable variable=resourceGroupName;isOutput=true]$(pulumi stack output -s devPOC resourceGroupName)"
+      echo "##vso[task.setvariable variable=storageAccountName;isOutput=true]$(pulumi stack output -s devPOC saAccountName)"
+      echo "##vso[task.setvariable variable=containerName;isOutput=true]$(pulumi stack output -s devPOC containerName)"
     name: pulumi
 
 - job: deploy
