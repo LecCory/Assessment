@@ -36,12 +36,15 @@ jobs:
       createStack: true
       
     displayName: Standup Infrastructure
-
-  - script: |
-      echo $(pulumi stack output -s devPOC resourceGroupName)
-      echo "##vso[task.setvariable variable=storageAccountName;isOutput=true]$(pulumi stack output -s devPOC saAccountName)"
-      echo "##vso[task.setvariable variable=containerName;isOutput=true;]$(pulumi stack output -s devPOC containerName)"
-    name: pulumi
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
+        
+        Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
+        write-host $env:containerName
+        name: pulumi
 
 - job: deploy
   condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
