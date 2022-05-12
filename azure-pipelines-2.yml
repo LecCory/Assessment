@@ -49,13 +49,14 @@ stages:
       name: pulumi
 
 - stage: Deploy
+  condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
+  dependsOn: infra
+
+  variables:
+    containerName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
   jobs:
   - job: deploy
-    condition: ne(dependencies.infra.outputs['pulumi.containerName'], '')
-    dependsOn: infra
 
-    variables:
-      containerName: $[ dependencies.infra.outputs['pulumi.containerName'] ]
     steps:
     - checkout: self
     - task: PowerShell@2
