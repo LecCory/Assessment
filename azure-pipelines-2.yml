@@ -70,7 +70,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls
+          cd api
           func azure functionapp publish $(containerName)
         
         
