@@ -48,7 +48,7 @@ stages:
     #       write-host $env:containerName
     #   name: pulumi
       - script: |
-          echo $(stage.name)
+          echo $(System.StageName)
 
 - stage: Deploy
   
