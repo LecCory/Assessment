@@ -47,8 +47,8 @@ stages:
     #       Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
     #       write-host $env:containerName
     #   name: pulumi
-    - script: |
-        echo $(stage.name)
+      - script: |
+          echo $(stage.name)
 
 - stage: Deploy
   
