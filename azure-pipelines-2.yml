@@ -18,14 +18,14 @@ stages:
 
 
     steps:
+      - checkout: none
+    # - checkout: pulumi-testing
+    # - checkout: self
 
-    - checkout: pulumi-testing
-    - checkout: self
-
-    - task: Npm@1
-      inputs:
-        command: 'install'
-        workingDir: pulumi-testing
+    # - task: Npm@1
+    #   inputs:
+    #     command: 'install'
+    #     workingDir: pulumi-testing
     # - task: Pulumi@1
     #   env:
     #     PULUMI_ACCESS_TOKEN: $(pulumi)
