@@ -12,7 +12,7 @@ trigger: none
 pool:
   name: SelfPool
 stages:
-- stage: Build Site
+- stage: Build_Site
   jobs:
     - job: APIBuild
       steps:
