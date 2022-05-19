@@ -76,6 +76,7 @@ stages:
         displayName: Standup Infrastructure
       - task: PowerShell@2
         inputs:
+          workingDirectory: pulumi-testing
           targetType: 'inline'
           script: |
             $output=$(pulumi preview -s devPOC --show-sames -j) | ConvertFrom-Json
@@ -87,6 +88,7 @@ stages:
             Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
             write-host $env:containerName
         name: pulumi
+        displayName: "Export Pulumi Vars"
       - script: |
           echo $(System.StageName)
 
