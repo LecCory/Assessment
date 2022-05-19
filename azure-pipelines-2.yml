@@ -58,22 +58,22 @@ stages:
       - checkout: self
 
 
-      - task: Npm@1
-        inputs:
-          command: 'install'
-          workingDir: pulumi-testing
-      - task: Pulumi@1
-        env:
-          PULUMI_ACCESS_TOKEN: $(pulumi)
-        inputs:
-          azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-          cwd: pulumi-testing
-          command: 'up'
-          args: '--yes -f'
-          stack: 'devPOC'
-          createStack: true
+      # - task: Npm@1
+      #   inputs:
+      #     command: 'install'
+      #     workingDir: pulumi-testing
+      # - task: Pulumi@1
+      #   env:
+      #     PULUMI_ACCESS_TOKEN: $(pulumi)
+      #   inputs:
+      #     azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+      #     cwd: pulumi-testing
+      #     command: 'up'
+      #     args: '--yes -f'
+      #     stack: 'devPOC'
+      #     createStack: true
           
-        displayName: Standup Infrastructure
+      #   displayName: Standup Infrastructure
       - task: PowerShell@2
         inputs:
           workingDirectory: pulumi-testing
