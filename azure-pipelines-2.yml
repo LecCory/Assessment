@@ -31,12 +31,11 @@ stages:
           workingDirectory: 'Assessment/api'
         displayName: install API and build
       
-      - task: PublishPipelineArtifact@1
+      - task: PublishBuildArtifacts@1
         inputs:
-          targetPath: '$(Pipeline.Workspace)/Assessment/api'
-          artifact: 'api'
-          publishLocation: 'pipeline'
-
+          PathtoPublish: '$(Build.SourcesDirectory)\assessment\api'
+          ArtifactName: 'api'
+          publishLocation: 'Container'
 
       # - task: Npm@1
       #   inputs:
