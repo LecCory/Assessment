@@ -82,6 +82,7 @@ stages:
             $output=$(pulumi preview -s devPOC --show-sames -j) | ConvertFrom-Json
             $output.steps
             $indexPos=$(foreach ($i in $output.steps) {if($i.urn -match 'clfa-'){$output.steps.indexOf($i)}})
+            $indexPos
             $faChange=$(if($output.steps[$indexPos].diffReasons.Length -gt 0){$true}else{$false})
 
             $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
