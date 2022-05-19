@@ -121,7 +121,7 @@ stages:
       displayName: Download UI Artifact
 
   - job: Deploy_FunctionApp
-    condition: ne(faChange, False)
+    condition: ne(variables.faChange, False)
     steps:
       
     - task: PowerShell@2
