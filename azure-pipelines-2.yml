@@ -80,7 +80,7 @@ stages:
           targetType: 'inline'
           script: |
             $output=$(pulumi preview -s corylec/newproj/devPOC --show-sames -j) | ConvertFrom-Json
-            $output.steps[9]
+            $output.steps[1]
             $indexPos=$(foreach ($i in $output.steps) {if($i.urn -match 'clfa-'){$output.steps.indexOf($i)}})
             $indexPos
             <#$faChange=$(if($output.steps[$indexPos].diffReasons.Length -gt 0){$true}else{$false})#>
