@@ -40,11 +40,11 @@ stages:
             script: |
               npm install
               npm run build
-            workingDirectory: 'Assessment/ui'
+            workingDirectory: 'ui'
           displayName: install UI and build
         - task: PublishBuildArtifacts@1
           inputs:
-            PathtoPublish: '$(Build.SourcesDirectory)\assessment\ui\dist'
+            PathtoPublish: '$(Build.SourcesDirectory)/ui/dist'
             ArtifactName: 'UI'
             publishLocation: 'Container'
           displayName: publish UI
