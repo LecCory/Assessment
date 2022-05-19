@@ -22,33 +22,49 @@ stages:
       - checkout: pulumi-testing
       - checkout: self
 
-      - task: Npm@1
-        inputs:
-          command: 'install'
-          workingDir: pulumi-testing
-      - task: Pulumi@1
-        env:
-          PULUMI_ACCESS_TOKEN: $(pulumi)
-        inputs:
-          azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-          cwd: $(Build.SourcesDirectory)\pulumi-testing
-          command: 'up'
-          args: '--yes -f'
-          stack: 'devPOC'
-          createStack: true
-          
-        displayName: Standup Infrastructure
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
           script: |
-            $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
+            npm install
+            npm run build
+          workingDirectory: 'Assessment/api'
+        displayName: install API and build
+      
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(Pipeline.Workspace)/Assessment/api'
+          artifact: 'api'
+          publishLocation: 'pipeline'
+
+
+      # - task: Npm@1
+      #   inputs:
+      #     command: 'install'
+      #     workingDir: pulumi-testing
+      # - task: Pulumi@1
+      #   env:
+      #     PULUMI_ACCESS_TOKEN: $(pulumi)
+      #   inputs:
+      #     azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
+      #     cwd: $(Build.SourcesDirectory)\pulumi-testing
+      #     command: 'up'
+      #     args: '--yes -f'
+      #     stack: 'devPOC'
+      #     createStack: true
+          
+      #   displayName: Standup Infrastructure
+      # - task: PowerShell@2
+      #   inputs:
+      #     targetType: 'inline'
+      #     script: |
+      #       $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
             
-            Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
-            write-host $env:containerName
-        name: pulumi
-      - script: |
-          echo $(System.StageName)
+      #       Write-Output ("##vso[task.setvariable variable=containerName;isOutput=true]$faName")
+      #       write-host $env:containerName
+      #   name: pulumi
+      # - script: |
+      #     echo $(System.StageName)
 
 - stage: Deploy
   
@@ -74,6 +90,7 @@ stages:
         targetType: 'inline'
         script: |
           cd api
+
           func azure functionapp publish $(containerName) --force
         
         
