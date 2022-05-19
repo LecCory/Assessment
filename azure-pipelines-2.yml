@@ -67,7 +67,7 @@ stages:
           PULUMI_ACCESS_TOKEN: $(pulumi)
         inputs:
           azureSubscription: 'Azure subscription 1 (1ff6c602-69fe-454f-a795-de22a178a6c0)'
-          cwd: $(Build.SourcesDirectory)\pulumi-testing
+          cwd: pulumi-testing
           command: 'up'
           args: '--yes -f'
           stack: 'devPOC'
