@@ -79,11 +79,11 @@ stages:
           workingDirectory: pulumi-testing
           targetType: 'inline'
           script: |
-            $output=$(pulumi preview -s devPOC --show-sames -j) | ConvertFrom-Json
+            $output=$(pulumi preview -s corylec/newproj/devPOC --show-sames -j) | ConvertFrom-Json
             $output.steps
             $indexPos=$(foreach ($i in $output.steps) {if($i.urn -match 'clfa-'){$output.steps.indexOf($i)}})
             $indexPos
-            $faChange=$(if($output.steps[$indexPos].diffReasons.Length -gt 0){$true}else{$false})
+            <#$faChange=$(if($output.steps[$indexPos].diffReasons.Length -gt 0){$true}else{$false})#>
 
             $faName=$(pulumi stack output -s corylec/newproj/devPOC faName)
             Write-Output ("##vso[task.setvariable variable=faChange;isOutput=true]$faChange")
