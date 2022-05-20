@@ -78,10 +78,10 @@ stages:
       - task: PowerShell@2
         inputs:
           workingDirectory: pulumi-testing
-          pwsh: true
+         
           targetType: 'inline'
           script: |
-            $output=$(pulumi preview -s corylec/newproj/devPOC --show-sames -j) | ConvertFrom-Json
+            $output=$(pulumi preview -s corylec/newproj/devPOC --show-sames -j | ConvertFrom-Json)
             $output.steps
             $indexPos=$(foreach ($i in $output.steps) {if($i.urn -match 'clfa-'){$output.steps.indexOf($i)}})
             $indexPos
