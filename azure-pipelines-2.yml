@@ -82,7 +82,7 @@ stages:
           targetType: 'inline'
           script: |
             pwd
-            $output=$(pulumi preview -s corylec/newproj/devPOC --show-sames -j) | ConvertFrom-Json
+            $output=@($(pulumi preview -s corylec/newproj/devPOC --show-sames -j) | ConvertFrom-Json)
             Write-Output $output.steps
             $indexPos=$(foreach ($i in $output.steps) {if($i.urn -match 'clfa-'){$output.steps.indexOf($i)}})
             $indexPos
